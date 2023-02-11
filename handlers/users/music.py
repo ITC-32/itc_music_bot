@@ -53,3 +53,17 @@ async def send_music(callback: CallbackQuery, state: FSMContext):
         callback.from_user.id,
         audio=InputFile(music.mp3_file_path)
     )
+
+
+@dp.message_handler(text=COMMANDS["popular_music"])
+async def popular_music(message: Message):
+    with Session() as session:
+        popular_musics = session.query(Music).order_by(
+            Music.downloads.desc()
+        ).limit(5)
+    await message.answer("5 самых популярных треков")
+    for music in popular_musics:
+        await message.bot.send_audio(
+            message.from_user.id,
+            audio=InputFile(music.mp3_file_path)
+        )

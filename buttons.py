@@ -12,6 +12,7 @@ SEARCH_MUSIC_BUTTON = KeyboardButton(COMMANDS["search_music"])
 ADD_ALBUM_BUTTON = KeyboardButton(COMMANDS["add_album"])
 ADD_MUSIC_ALBUM_BUTTON = KeyboardButton(COMMANDS["add_music_album"])
 ALBUMS_LIST_BUTTON = KeyboardButton(COMMANDS["albums_list"])
+POPULAR_MUSIC_BUTTON = KeyboardButton(COMMANDS["popular_music"])
 
 
 # inline buttons

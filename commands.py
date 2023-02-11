@@ -8,5 +8,6 @@ COMMANDS = {
     "search_music": "Поиск трека 🔍🎵",
     "add_album": "Добавить альбом 📀",
     "add_music_album": "Добавить трек в альбом 🎵📀",
-    "albums_list": "Список альбомов 🎵📀"
+    "albums_list": "Список альбомов 🎵📀",
+    "popular_music": "Популярные треки 🎵"
 }
