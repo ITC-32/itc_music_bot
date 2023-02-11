@@ -86,16 +86,23 @@ async def choose_album(callback: CallbackQuery, state: FSMContext):
             album_musics = session.query(AlbumMusic).filter(
                 AlbumMusic.album_id == int(callback.data)
             ).all()
-            for music in album_musics:
-                found_music = session.query(Music).filter(
-                    Music.id == music.music_id
-                ).first()
-                musics_list.append(found_music)
-        for music in musics_list:
-            await callback.bot.send_audio(
+        if not album_musics:
+            await callback.bot.send_message(
                 callback.from_user.id,
-                audio=InputFile(music.mp3_file_path)
+                "Треков по этому альбому нет!"
             )
+        else:
+            with Session() as session:
+                for music in album_musics:
+                    found_music = session.query(Music).filter(
+                        Music.id == music.music_id
+                    ).first()
+                    musics_list.append(found_music)
+            for music in musics_list:
+                await callback.bot.send_audio(
+                    callback.from_user.id,
+                    audio=InputFile(music.mp3_file_path)
+                )
         await callback.bot.delete_message(
             callback.from_user.id,
             callback.message.message_id
